@@ -6,5 +6,8 @@ repositories {
 
 dependencies {
     compile 'org.codehaus.groovy:groovy-all:2.4.7'
+    compile 'org.gebish:geb-core:1.0'
+    compile 'org.seleniumhq.selenium:selenium-chrome-driver:2.52.0'
+    compile 'org.seleniumhq.selenium:selenium-support:2.52.0'
     testCompile 'junit:junit:4.12'
 }
