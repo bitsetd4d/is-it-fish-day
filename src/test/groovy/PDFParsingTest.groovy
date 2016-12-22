@@ -7,7 +7,7 @@ class PDFParsingTest {
     final String expectedLastLine = 'Please Speak To A Member Of Our Team'
 
     @Test
-    void readSamplePdfUsingTika() throws Exception {
+    void readSamplePdfUsingTika() {
         def tika = new Tika()
         def menuStream = getClass().getResourceAsStream("sample-menu-central.pdf")
         def textContentOfPdf = tika.parseToString(menuStream).trim()
@@ -18,7 +18,7 @@ class PDFParsingTest {
     }
 
     @Test
-    void checkMenuLinesPresentWithParser() throws Exception {
+    void checkMenuLinesPresentWithParser() {
         def pdfAsBytes = getClass().getResourceAsStream("sample-menu-central.pdf").getBytes()
         def parser = new MenuParser(pdfAsBytes)
         def menuLines = parser.linesFromPdf

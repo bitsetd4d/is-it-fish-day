@@ -1,9 +1,9 @@
 import org.junit.Test
 
-class SiteMenusPageIntegrationTest {
+class SiteMenusPageLiveTest {
 
     @Test
-    void loadPage() throws Exception {
+    void loadPage() {
         def grabber = new MenuGrabber()
         grabber.grabMenus()
 
