@@ -1,3 +1,5 @@
+package weather
+
 import config.SecureConfig
 import groovy.json.JsonSlurper
 import org.junit.Test

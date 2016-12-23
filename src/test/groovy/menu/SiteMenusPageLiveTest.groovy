@@ -1,3 +1,6 @@
+package menu
+
+import menu.MenuGrabber
 import org.junit.Test
 
 class SiteMenusPageLiveTest {

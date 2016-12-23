@@ -1,6 +1,9 @@
+package weather
+
 import groovy.json.JsonSlurper
 import org.junit.Before
 import org.junit.Test
+import weather.WeatherReporter
 
 class WeatherReporterTest {
 

@@ -1,4 +1,4 @@
-
+package menu
 
 import geb.Page
 

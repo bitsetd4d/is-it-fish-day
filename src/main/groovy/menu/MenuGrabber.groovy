@@ -1,3 +1,5 @@
+package menu
+
 import geb.Browser
 import org.openqa.selenium.Dimension
 import static Thread.sleep

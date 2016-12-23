@@ -1,3 +1,5 @@
+package menu
+
 import org.apache.tika.Tika
 
 class MenuParser {

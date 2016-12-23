@@ -1,3 +1,6 @@
+package menu
+
+import menu.MenuParser
 import org.apache.tika.Tika
 import org.junit.Test
 
