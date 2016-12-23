@@ -1,10 +1,11 @@
+import config.SecureConfig
 import groovy.json.JsonSlurper
 import org.junit.Test
 
 class DarkSkyIntegrationTest {
 
     static getApiKey() {
-        "97aeac6aa2baf5b6b73e6d5100347908"
+        SecureConfig.instance.darkskyapikey
     }
 
     static getLocation() {
@@ -15,8 +16,7 @@ class DarkSkyIntegrationTest {
         getResourceAsStream("sample-dark-sky-response.json").text
     }
 
-    //@Test
-    void callService() {
+    public static void main(String[] args) {
         def url = "https://api.darksky.net/forecast/$apiKey/$location?units=uk2&exclude=minutely,daily,alerts,flags"
         def response = url.toURL().text
         println response
