@@ -50,6 +50,7 @@ class ConfigLoader {
         sampleConfig.withWriter { out ->
             out.println 'darkskyapikey = "replace_this_with_api_key"'
             out.println 'slackurl = "replace_this_with_slack_url_for_incomming_message_hook"'
+            out.println 'slackchannel = "replace_this_with_slack_channel_including_the_#_prefix"'
             out.println ''
             out.println 'deleteme = true    // Delete this line when you have finished'
         }
