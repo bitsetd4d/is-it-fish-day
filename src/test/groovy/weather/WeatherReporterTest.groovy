@@ -19,7 +19,7 @@ class WeatherReporterTest {
 
     @Test
     void checkSampleJsonResponse() {
-        def sampleJson = getClass().getResourceAsStream("sample-dark-sky-response.json").text
+        def sampleJson = getClass().getResourceAsStream("/sample-dark-sky-response.json").text
         def jsonSlurper = new JsonSlurper()
         def json = jsonSlurper.parseText sampleJson
         def weatherReporter = new WeatherReporter(json)

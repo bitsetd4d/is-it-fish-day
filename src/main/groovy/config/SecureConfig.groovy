@@ -9,6 +9,17 @@ import java.nio.file.Paths
 @Singleton
 class SecureConfig {
 
-    @Delegate ConfigLoader configLoader = new ConfigLoader(Paths.get(System.properties['user.home'], ".isitfishday", "secure.groovy"))
+    ConfigLoader config = new ConfigLoader(Paths.get('/', System.properties['user.home'], ".isitfishday", "secure.groovy"))
 
+    def getDarkSpyApiKey() {
+        config.darkSkyApiKey
+    }
+
+    def getSlackChannel() {
+        config.slackchannel
+    }
+
+    def getSlackUrl() {
+        config.slackurl
+    }
 }

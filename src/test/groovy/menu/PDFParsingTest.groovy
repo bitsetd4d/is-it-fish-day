@@ -1,6 +1,5 @@
 package menu
 
-import menu.MenuParser
 import org.apache.tika.Tika
 import org.junit.Test
 
@@ -12,7 +11,7 @@ class PDFParsingTest {
     @Test
     void readSamplePdfUsingTika() {
         def tika = new Tika()
-        def menuStream = getClass().getResourceAsStream("sample-menu-central.pdf")
+        def menuStream = getClass().getResourceAsStream("/sample-menu-central.pdf")
         def textContentOfPdf = tika.parseToString(menuStream).trim()
         println textContentOfPdf
         assert textContentOfPdf.contains(expectedFirstLine)
@@ -22,7 +21,7 @@ class PDFParsingTest {
 
     @Test
     void checkMenuLinesPresentWithParser() {
-        def pdfAsBytes = getClass().getResourceAsStream("sample-menu-central.pdf").getBytes()
+        def pdfAsBytes = getClass().getResourceAsStream("/sample-menu-central.pdf").getBytes()
         def parser = new MenuParser(pdfAsBytes)
         def menuLines = parser.linesFromPdf
         menuLines.forEach { println "Menu: $it" }

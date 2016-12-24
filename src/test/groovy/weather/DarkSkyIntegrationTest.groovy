@@ -7,7 +7,7 @@ import org.junit.Test
 class DarkSkyIntegrationTest {
 
     static getApiKey() {
-        SecureConfig.instance.darkskyapikey
+        SecureConfig.instance.darkSpyApiKey
     }
 
     static getLocation() {
@@ -15,10 +15,10 @@ class DarkSkyIntegrationTest {
     }
 
     static getSampleJsonResponse() {
-        getResourceAsStream("sample-dark-sky-response.json").text
+        getResourceAsStream("/sample-dark-sky-response.json").text
     }
 
-    public static void main(String[] args) {
+    static void main(String[] args) {
         def url = "https://api.darksky.net/forecast/$apiKey/$location?units=uk2&exclude=minutely,daily,alerts,flags"
         def response = url.toURL().text
         println response
