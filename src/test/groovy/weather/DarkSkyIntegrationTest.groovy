@@ -11,7 +11,7 @@ class DarkSkyIntegrationTest {
     }
 
     static getLocation() {
-        "51.489440, -0.327900"
+        "51.489440,-0.327900"
     }
 
     static getSampleJsonResponse() {

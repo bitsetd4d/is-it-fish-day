@@ -12,7 +12,7 @@ class SecureConfig {
     ConfigLoader config = new ConfigLoader(Paths.get('/', System.properties['user.home'], ".isitfishday", "secure.groovy"))
 
     def getDarkSpyApiKey() {
-        config.darkSkyApiKey
+        config.darkskyapikey
     }
 
     def getSlackChannel() {
