@@ -1,3 +1,4 @@
+import menu.MenuFormatter
 import menu.MenuGrabber
 import menu.MenuParser
 import slack.SlackAttachment
@@ -76,6 +77,7 @@ class Main {
 
     static menuTextFromPdf(pdf) {
         def menuParser = new MenuParser(pdf)
-        menuParser.linesFromPdf
+        def formatter = new MenuFormatter(menuParser.linesFromPdf)
+        formatter.formattedLines
     }
 }

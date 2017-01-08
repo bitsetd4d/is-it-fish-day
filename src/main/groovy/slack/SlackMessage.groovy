@@ -11,7 +11,7 @@ class SlackMessage {
         def json = new JsonBuilder()
         json {
             channel SecureConfig.instance.slackChannel
-            username 'Food Bot'
+            username 'Ethel McFishbot'
             icon_emoji ':knife_fork_plate:'
             text title
             attachments attachments*.intoJson(json)
