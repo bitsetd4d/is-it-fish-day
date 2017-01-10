@@ -10,7 +10,12 @@ class SlackAttachment {
             fallback title
             pretext title
             color color
+            'mrkdwn_in' markdown()
             fields fields*.intoJson(json)
         }
+    }
+
+    String[] markdown() {
+        ['pretext', 'text', 'fields']
     }
 }
