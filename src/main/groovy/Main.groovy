@@ -13,6 +13,7 @@ class Main {
 
     def centralMenu
     def wxhMenu
+    def theMarketMenu
 
     def currentWeather
     def weatherCurrentHour
@@ -52,6 +53,7 @@ class Main {
         menuGrabber.grabMenus()
         centralMenu = menuTextFromPdf(menuGrabber.centralMenuPdf)
         wxhMenu = menuTextFromPdf(menuGrabber.wxhMenuPdf)
+        theMarketMenu = menuTextFromPdf(menuGrabber.theMarketPdf)
     }
 
     void lookupCurrentWeather() {
@@ -70,7 +72,10 @@ class Main {
         def delphine = new SlackField(title: 'Delphine')
         delphine.lines = wxhMenu
 
-        def menus = new SlackAttachment(title: 'Menus today', fields: [diningRoom, delphine])
+        def theMarket = new SlackField(title: 'The Market')
+        theMarket.lines = theMarketMenu
+
+        def menus = new SlackAttachment(title: 'Menus today', fields: [diningRoom, delphine, theMarket])
 
         def isItFishDayAtCentral = createFishDayMessageContents("Sky Central", centralMenuItemsContainingFish)
         def isItFishDayAtWxh = createFishDayMessageContents("Delphine", wxhMenuItemsContainingFish)
