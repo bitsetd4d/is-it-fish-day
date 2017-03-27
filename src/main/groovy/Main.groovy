@@ -47,7 +47,7 @@ class Main {
 
         println ""
         println "Call fish hooks"
-        callHook(itFishDaySomewhere())
+        callHook(isItFishDaySomewhere())
 
         println ""
         println "Done."
