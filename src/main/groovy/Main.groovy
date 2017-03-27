@@ -22,9 +22,7 @@ class Main {
     def centralMenuItemsContainingFish
 
     static void main(args) {
-        //new Main().go()
-        new Main().callHook(true)
-        new Main().callHook(false)
+        new Main().go()
     }
 
     void go() {
@@ -122,10 +120,6 @@ class Main {
         } else {
             isItFishDaySlackField.lines = [String.format("No fish at %s today folks!", menuLocationName)]
         }
-
-        println "HERE"
-
-        println isItFishDaySlackField.lines
 
         isItFishDaySlackField
     }
