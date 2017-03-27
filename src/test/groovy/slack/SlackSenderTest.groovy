@@ -25,7 +25,7 @@ class SlackSenderTest {
 
     @Test
     void checkJsonFromSampleMessage() {
-        def expectedJson = """{"channel":"${SecureConfig.instance.getSlackChannel()}","username":"Food Bot","icon_emoji":":knife_fork_plate:","text":"Here are the menus for today","attachments":[{"fallback":"Menus today","pretext":"Menus today","color":"#00D000","fields":[{"title":"The Dining Room","value":"Line1\\nLine2","short":false},{"title":"Delphine","value":"Line3\\nLine4","short":false}]},{"fallback":"The Weather","pretext":"The Weather","color":"#00D000","fields":[{"title":"Partly Cloudy 10.5C. Nearest storm 35 miles.","value":"14:12 : Partly Cloudy 11C.\\n15:12 : Partly Cloudy 11C","short":false}]}]}"""
+        def expectedJson = """{"channel":"#paulm-test-channel","username":"Ethel McFishbot","icon_emoji":":knife_fork_plate:","text":"Here are the menus for today","attachments":[{"fallback":"Menus today","pretext":"Menus today","color":"#00D000","mrkdwn_in":["pretext","text","fields"],"fields":[{"title":"The Dining Room","value":"Line1\\nLine2","short":false},{"title":"Delphine","value":"Line3\\nLine4","short":false}]},{"fallback":"The Weather","pretext":"The Weather","color":"#00D000","mrkdwn_in":["pretext","text","fields"],"fields":[{"title":"Partly Cloudy 10.5C. Nearest storm 35 miles.","value":"14:12 : Partly Cloudy 11C.\\n15:12 : Partly Cloudy 11C","short":false}]}]}"""
         assert new JsonBuilder(getSampleMessage().asJson()).toString() == expectedJson.toString()
     }
 
