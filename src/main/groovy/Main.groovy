@@ -22,7 +22,9 @@ class Main {
     def centralMenuItemsContainingFish
 
     static void main(args) {
-        new Main().go()
+        //new Main().go()
+        new Main().callHook(true)
+        new Main().callHook(false)
     }
 
     void go() {
@@ -44,6 +46,11 @@ class Main {
         def message = createSlackMessage()
         def sender = new SlackSender()
         sender.send(message)
+
+        println ""
+        println "Call fish hooks"
+        callHook(itFishDaySomewhere())
+
         println ""
         println "Done."
     }
@@ -63,6 +70,21 @@ class Main {
         currentWeather = weatherReporter.currentWeatherReport
         weatherCurrentHour = weatherReporter.getWeatherReportForNextHour(0)
         weatherNextHour = weatherReporter.getWeatherReportForNextHour(1)
+    }
+
+    boolean isItFishDaySomewhere() {
+        centralMenuItemsContainingFish.size() > 0 || wxhMenuItemsContainingFish.size() > 0
+    }
+
+    def callHook(boolean fishDay) {
+        String hookName = fishDay ? "./fish.sh" : "./not-fish.sh"
+        println "Calling $hookName"
+        try {
+            hookName.execute()
+        } catch (Exception e) {
+            e.printStackTrace()
+        }
+        println "Called $hookName"
     }
 
     def createSlackMessage() {
