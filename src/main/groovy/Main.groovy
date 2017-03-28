@@ -18,6 +18,7 @@ class Main {
     def weatherCurrentHour
     def weatherNextHour
     def centralMenuItemsContainingFish
+    def marketMenuItemsContainingFish
 
     static void main(args) {
         new Main().go()
@@ -68,7 +69,7 @@ class Main {
     }
 
     boolean isItFishDaySomewhere() {
-        centralMenuItemsContainingFish.size() > 0
+        centralMenuItemsContainingFish.size() > 0 || marketMenuItemsContainingFish.size() > 0
     }
 
     def callHook(boolean fishDay) {
@@ -92,8 +93,9 @@ class Main {
         def menus = new SlackAttachment(title: 'Menus today', fields: [diningRoom, theMarket])
 
         def isItFishDayAtCentral = createFishDayMessageContents("Sky Central", centralMenuItemsContainingFish)
+        def isItFishDayAtTheMarket = createFishDayMessageContents("The Market", marketMenuItemsContainingFish)
 
-        def isItFishDay = new SlackAttachment(title: 'Is it fish day?', fields: [isItFishDayAtCentral])
+        def isItFishDay = new SlackAttachment(title: 'Is it fish day?', fields: [isItFishDayAtCentral, isItFishDayAtTheMarket])
 
         def weather = new SlackField(title: currentWeather)
         weather.lines << weatherCurrentHour
@@ -119,6 +121,7 @@ class Main {
 
     def searchMenusForFish() {
         centralMenuItemsContainingFish = FishParser.getMenuItemsContainingFish(centralMenu)
+        marketMenuItemsContainingFish = FishParser.getMenuItemsContainingFish(theMarketMenu)
     }
 
     static menuTextFromPdf(pdf) {
