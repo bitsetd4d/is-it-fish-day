@@ -12,13 +12,11 @@ import weather.WeatherReporter
 class Main {
 
     def centralMenu
-    def wxhMenu
     def theMarketMenu
 
     def currentWeather
     def weatherCurrentHour
     def weatherNextHour
-    def wxhMenuItemsContainingFish
     def centralMenuItemsContainingFish
 
     static void main(args) {
@@ -57,7 +55,6 @@ class Main {
         MenuGrabber menuGrabber = new MenuGrabber()
         menuGrabber.grabMenus()
         centralMenu = menuTextFromPdf(menuGrabber.centralMenuPdf)
-        wxhMenu = menuTextFromPdf(menuGrabber.wxhMenuPdf)
         theMarketMenu = menuTextFromPdf(menuGrabber.theMarketPdf)
     }
 
@@ -89,18 +86,14 @@ class Main {
         def diningRoom = new SlackField(title: 'The Dining Room')
         diningRoom.lines = centralMenu
 
-        def delphine = new SlackField(title: 'Delphine')
-        delphine.lines = wxhMenu
-
         def theMarket = new SlackField(title: 'The Market')
         theMarket.lines = theMarketMenu
 
-        def menus = new SlackAttachment(title: 'Menus today', fields: [diningRoom, delphine, theMarket])
+        def menus = new SlackAttachment(title: 'Menus today', fields: [diningRoom, theMarket])
 
         def isItFishDayAtCentral = createFishDayMessageContents("Sky Central", centralMenuItemsContainingFish)
-        def isItFishDayAtWxh = createFishDayMessageContents("Delphine", wxhMenuItemsContainingFish)
 
-        def isItFishDay = new SlackAttachment(title: 'Is it fish day?', fields: [isItFishDayAtCentral, isItFishDayAtWxh])
+        def isItFishDay = new SlackAttachment(title: 'Is it fish day?', fields: [isItFishDayAtCentral])
 
         def weather = new SlackField(title: currentWeather)
         weather.lines << weatherCurrentHour
@@ -126,7 +119,6 @@ class Main {
 
     def searchMenusForFish() {
         centralMenuItemsContainingFish = FishParser.getMenuItemsContainingFish(centralMenu)
-        wxhMenuItemsContainingFish = FishParser.getMenuItemsContainingFish(wxhMenu)
     }
 
     static menuTextFromPdf(pdf) {

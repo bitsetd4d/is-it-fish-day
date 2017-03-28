@@ -12,8 +12,8 @@ class SiteMenusPageLiveTest {
         def central = new File("build/central.pdf")
         central << grabber.centralMenuPdf
 
-        def wxh = new File("build/wxh.pdf")
-        wxh << grabber.wxhMenuPdf
+        def market = new File("build/market.pdf")
+        market << grabber.theMarketPdf
     }
 
 }

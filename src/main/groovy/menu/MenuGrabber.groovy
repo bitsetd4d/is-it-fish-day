@@ -11,7 +11,6 @@ class MenuGrabber {
 
     def browser = new Browser()
     def centralMenuPdf
-    def wxhMenuPdf
     def theMarketPdf
 
     def grabMenus() {
@@ -20,9 +19,6 @@ class MenuGrabber {
 
         selectChooseRestaurantLink()
         downloadMenuForSkyCentral()
-
-        selectChooseRestaurantLink()
-        downloadMenuForWestCrossHouse()
 
         selectChooseRestaurantLink()
         downloadMenuForTheMarket()
@@ -50,13 +46,6 @@ class MenuGrabber {
         browser.skyCentral.click()
         waitForPageToCatchup()
         centralMenuPdf = downloadMenu()
-    }
-
-    private void downloadMenuForWestCrossHouse() {
-        announce("Choosing West Cross House")
-        browser.westCrossHouse.click()
-        waitForPageToCatchup()
-        wxhMenuPdf = downloadMenu()
     }
 
     private void downloadMenuForTheMarket() {

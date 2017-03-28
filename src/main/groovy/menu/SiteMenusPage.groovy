@@ -18,7 +18,6 @@ class SiteMenusPage extends Page {
 
         restaurants { $("#restaurants ul a") }
         skyCentral { restaurants.find { it.text() == 'THE DINING ROOM' } }
-        westCrossHouse { restaurants.find { it.text() == 'WEST CROSS HOUSE' } }
         theMarket { restaurants.find { it.text() == 'THE MARKET' } }
 
         downloadMenu { $("#restaurant-menu a") }
