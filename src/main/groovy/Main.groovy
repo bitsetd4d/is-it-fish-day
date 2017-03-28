@@ -68,7 +68,7 @@ class Main {
     }
 
     boolean isItFishDaySomewhere() {
-        centralMenuItemsContainingFish.size() > 0 || wxhMenuItemsContainingFish.size() > 0
+        centralMenuItemsContainingFish.size() > 0
     }
 
     def callHook(boolean fishDay) {
