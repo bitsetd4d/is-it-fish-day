@@ -1,7 +1,4 @@
-import menu.FishParser
-import menu.MenuFormatter
-import menu.MenuGrabber
-import menu.MenuParser
+import menu.*
 import slack.SlackAttachment
 import slack.SlackField
 import slack.SlackMessage
@@ -56,7 +53,7 @@ class Main {
         MenuGrabber menuGrabber = new MenuGrabber()
         menuGrabber.grabMenus()
         centralMenu = menuTextFromPdf(menuGrabber.centralMenuPdf)
-        theMarketMenu = menuTextFromPdf(menuGrabber.theMarketPdf)
+        theMarketMenu = menuTextFromTheMarketPdf(menuGrabber.theMarketPdf)
     }
 
     void lookupCurrentWeather() {
@@ -127,6 +124,12 @@ class Main {
     static menuTextFromPdf(pdf) {
         def menuParser = new MenuParser(pdf)
         def formatter = new MenuFormatter(menuParser.linesFromPdf)
+        formatter.formattedLines
+    }
+
+    static menuTextFromTheMarketPdf(pdf) {
+        def menuParser = new MenuParser(pdf)
+        def formatter = new TheMarketMenuFormatter(menuParser.linesFromPdf)
         formatter.formattedLines
     }
 }
