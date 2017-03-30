@@ -34,6 +34,9 @@ class MenuFormatter {
     }
 
     def format(line) {
+        if (isWarning(line)) {
+            return "`$line`"
+        }
         if (isHeading(line)) {
             return "*$line*"
         }
@@ -63,7 +66,7 @@ class MenuFormatter {
         false
     }
 
-    static isHeading(String line) {
+    def isHeading(String line) {
         line = line.toLowerCase()
         if (line.contains("soups")) return true
         if (line.contains("grab a snack")) return true
@@ -72,5 +75,9 @@ class MenuFormatter {
         if (line.contains("dessert")) return true
         if (line.contains("recommended")) return true
         false
+    }
+
+    def isWarning(line) {
+        return false;
     }
 }
