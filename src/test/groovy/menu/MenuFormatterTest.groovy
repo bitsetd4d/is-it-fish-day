@@ -1,5 +1,6 @@
 package menu
 
+import menu.formatter.MenuFormatter
 import org.junit.Test
 
 class MenuFormatterTest {
@@ -51,7 +52,23 @@ class MenuFormatterTest {
     @Test
     void formatExampleMenu() {
         def lines = getSampleMenu()
-        MenuFormatter formatter = new MenuFormatter(lines)
+        MenuFormatter formatter = new MenuFormatter(lines) {
+
+            @Override
+            def shouldStartNewLine(Object line) {
+                return false
+            }
+
+            @Override
+            def isHeading(Object line) {
+                return false
+            }
+
+            @Override
+            def isWarning(Object line) {
+                return false
+            }
+        }
         def output = formatter.formattedLines
         output.forEach {
             println "Menu $it"
@@ -63,5 +80,4 @@ class MenuFormatterTest {
         def parser = new MenuParser(pdfAsBytes)
         parser.linesFromPdf
     }
-
 }
