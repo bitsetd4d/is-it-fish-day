@@ -1,4 +1,7 @@
 import menu.*
+import menu.formatter.MenuFormatter
+import menu.formatter.TheDiningRoomMenuFormatter
+import menu.formatter.TheMarketMenuFormatter
 import slack.SlackAttachment
 import slack.SlackField
 import slack.SlackMessage
@@ -52,7 +55,7 @@ class Main {
     void grabMenusOfInterest() {
         MenuGrabber menuGrabber = new MenuGrabber()
         menuGrabber.grabMenus()
-        centralMenu = menuTextFromPdf(menuGrabber.centralMenuPdf)
+        centralMenu = menuTextFromTheDiningRoomPdf(menuGrabber.centralMenuPdf)
         theMarketMenu = menuTextFromTheMarketPdf(menuGrabber.theMarketPdf)
     }
 
@@ -121,9 +124,9 @@ class Main {
         marketMenuItemsContainingFish = FishParser.getMenuItemsContainingFish(theMarketMenu)
     }
 
-    static menuTextFromPdf(pdf) {
+    static menuTextFromTheDiningRoomPdf(pdf) {
         def menuParser = new MenuParser(pdf)
-        def formatter = new MenuFormatter(menuParser.linesFromPdf)
+        def formatter = new TheDiningRoomMenuFormatter(menuParser.linesFromPdf)
         formatter.formattedLines
     }
 

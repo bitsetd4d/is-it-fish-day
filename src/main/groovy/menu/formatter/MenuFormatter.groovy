@@ -1,6 +1,6 @@
-package menu
+package menu.formatter
 
-class MenuFormatter {
+abstract class MenuFormatter {
 
     def lines
     def formattedLines
@@ -13,6 +13,10 @@ class MenuFormatter {
         formatLines()
     }
 
+    abstract shouldStartNewLine(line);
+    abstract isHeading(line)
+    abstract isWarning(line)
+
     def formatLines() {
         def current = ""
         formattedLines = []
@@ -23,14 +27,6 @@ class MenuFormatter {
                 current = ""
             }
         }
-    }
-
-    def shouldStartNewLine(line) {
-        if (formattedLines.size() <= 2) return true
-        if (isSeparator(line)) return true
-        if (isPriceAtEnd(line)) return true
-        if (isHeading(line)) return true
-        false
     }
 
     def format(line) {
@@ -64,20 +60,5 @@ class MenuFormatter {
         if (endsInPounds.matcher(line).matches()) return true
         if (endsInPence.matcher(line.toLowerCase()).matches()) return true
         false
-    }
-
-    def isHeading(String line) {
-        line = line.toLowerCase()
-        if (line.contains("soups")) return true
-        if (line.contains("grab a snack")) return true
-        if (line.contains("live well")) return true
-        if (line.contains("event")) return true
-        if (line.contains("dessert")) return true
-        if (line.contains("recommended")) return true
-        false
-    }
-
-    def isWarning(line) {
-        return false;
     }
 }
