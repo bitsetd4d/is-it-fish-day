@@ -13,18 +13,21 @@ abstract class MenuFormatter {
         formatLines()
     }
 
-    abstract shouldStartNewLine(line);
+    abstract shouldStartNewLine(line)
     abstract isHeading(line)
     abstract isWarning(line)
+    abstract shouldShowLine(line)
 
     def formatLines() {
         def current = ""
         formattedLines = []
         lines.forEach {
-            current += " " + format(it)
-            if (shouldStartNewLine(it)) {
-                formattedLines << current
-                current = ""
+            if (shouldShowLine(it)) {
+                current += " " + format(it)
+                if (shouldStartNewLine(it)) {
+                    formattedLines << current
+                    current = ""
+                }
             }
         }
     }

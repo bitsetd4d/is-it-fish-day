@@ -26,6 +26,11 @@ class TheDiningRoomMenuFormatter extends MenuFormatter {
     }
 
     def isWarning(line) {
-        return false;
+        return false
+    }
+
+    @Override
+    def shouldShowLine(line) {
+        return true
     }
 }
