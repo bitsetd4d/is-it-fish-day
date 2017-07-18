@@ -52,39 +52,39 @@ class TheMarketMenuFormatterTest {
     void shouldBeWarningIfTheLineIsYesterday() {
         // given
         Calendar yesterday = getCalendarSwappedByDays(-1)
-        def yesterdayLine = includeDayOfMonthSuffix(yesterday);
+        def yesterdayLine = includeDayOfMonthSuffix(yesterday)
         List<String> lines = [] << yesterdayLine
-        TheMarketMenuFormatter formatter = new TheMarketMenuFormatter(lines);
+        TheMarketMenuFormatter formatter = new TheMarketMenuFormatter(lines)
         // when
         def aWarning = formatter.isWarning(yesterdayLine)
         // then
-        assert aWarning;
+        assert aWarning
     }
 
     @Test
     void shouldNotBeWarningIfTheLineIsToday() {
         // given
         def calendar = Calendar.getInstance(Locale.UK)
-        def tomorrowLine = includeDayOfMonthSuffix(calendar);
+        def tomorrowLine = includeDayOfMonthSuffix(calendar)
         List<String> lines = [] << tomorrowLine
-        TheMarketMenuFormatter formatter = new TheMarketMenuFormatter(lines);
+        TheMarketMenuFormatter formatter = new TheMarketMenuFormatter(lines)
         // when
         def aWarning = formatter.isWarning(tomorrowLine)
         // then
-        assert !aWarning;
+        assert !aWarning
     }
 
     @Test
     void shouldBeWarningIfTheLineIsTomorrow() {
         // given
         Calendar tomorrow = getCalendarSwappedByDays(1)
-        def tomorrowLine = includeDayOfMonthSuffix(tomorrow);
+        def tomorrowLine = includeDayOfMonthSuffix(tomorrow)
         List<String> lines = [] << tomorrowLine
-        TheMarketMenuFormatter formatter = new TheMarketMenuFormatter(lines);
+        TheMarketMenuFormatter formatter = new TheMarketMenuFormatter(lines)
         // when
         def aWarning = formatter.isWarning(tomorrowLine)
         // then
-        assert aWarning;
+        assert aWarning
     }
 
     @Test
@@ -92,42 +92,42 @@ class TheMarketMenuFormatterTest {
         // given
         def notADateLine = "I'm not a date"
         List<String> lines = [] << notADateLine
-        TheMarketMenuFormatter formatter = new TheMarketMenuFormatter(lines);
+        TheMarketMenuFormatter formatter = new TheMarketMenuFormatter(lines)
         // when
         def aWarning = formatter.isWarning(notADateLine)
         // then
-        assert !aWarning;
+        assert !aWarning
     }
 
     def getCalendarSwappedByDays(daysFromNow) {
         def calendar = Calendar.getInstance(Locale.UK)
-        calendar.add(Calendar.DAY_OF_YEAR, daysFromNow);
+        calendar.add(Calendar.DAY_OF_YEAR, daysFromNow)
         calendar
     }
     def includeDayOfMonthSuffix(calendar) {
-        def dayOfMonthSuffix = getDayOfMonthSuffix(calendar.get(Calendar.DAY_OF_MONTH));
+        def dayOfMonthSuffix = getDayOfMonthSuffix(calendar.get(Calendar.DAY_OF_MONTH))
         SimpleDateFormat dateFormat = new SimpleDateFormat("EEEE dd MMMM yyyy",  Locale.ENGLISH)
         def rawDate = dateFormat.format(calendar.time)
-        Pattern p = Pattern.compile(TheMarketMenuFormatter.DATE_REG_EX);
-        def matcher = p.matcher(rawDate);
+        Pattern p = Pattern.compile(TheMarketMenuFormatter.DATE_REG_EX)
+        def matcher = p.matcher(rawDate)
         if (matcher.find()) {
             def start = matcher.start(1)
             def end = matcher.end(1)
             def dayOfTheMonth = matcher.group(1)
-            return rawDate.substring(0, start) + dayOfTheMonth + dayOfMonthSuffix + rawDate.substring(end);
+            return rawDate.substring(0, start) + dayOfTheMonth + dayOfMonthSuffix + rawDate.substring(end)
         }
     }
 
     String getDayOfMonthSuffix(final int n) {
-        Preconditions.checkArgument(n >= 1 && n <= 31, "illegal day of month: " + n);
+        Preconditions.checkArgument(n >= 1 && n <= 31, "illegal day of month: " + n)
         if (n >= 11 && n <= 13) {
-            return "th";
+            return "th"
         }
         switch (n % 10) {
-            case 1: return "st";
-            case 2: return "nd";
-            case 3: return "rd";
-            default: return "th";
+            case 1: return "st"
+            case 2: return "nd"
+            case 3: return "rd"
+            default: return "th"
         }
     }
 }
