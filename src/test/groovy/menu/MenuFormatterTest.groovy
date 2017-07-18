@@ -68,6 +68,11 @@ class MenuFormatterTest {
             def isWarning(Object line) {
                 return false
             }
+
+            @Override
+            def shouldShowLine(Object line) {
+                return true
+            }
         }
         def output = formatter.formattedLines
         output.forEach {

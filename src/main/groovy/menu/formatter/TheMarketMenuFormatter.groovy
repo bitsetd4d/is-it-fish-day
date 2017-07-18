@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat
 
 class TheMarketMenuFormatter extends MenuFormatter {
 
-    static final String DATE_REG_EX = "[A-Z][a-z]+ (\\d{2})[a-z]{0,2} [A-Z][a-z]+ \\d{4}";
+    static final String DATE_REG_EX = "[A-Z][a-z]+ (\\d{2})[a-z]{0,2} [A-Z][a-z]+ \\d{4}"
+
+    boolean seenAllergen
 
     TheMarketMenuFormatter(lines) {
         super(lines)
@@ -27,10 +29,18 @@ class TheMarketMenuFormatter extends MenuFormatter {
 
     def isWarning(line) {
         if (line.matches(DATE_REG_EX)) {
-            DateFormat fmt = new SimpleDateFormat('EEEE dd MMMM yyyy', Locale.UK);
-            return !fmt.format(new Date()).equals(line.replaceAll("(?<=\\d)(st|nd|rd|th)", ""));
+            DateFormat fmt = new SimpleDateFormat('EEEE dd MMMM yyyy', Locale.UK)
+            return !fmt.format(new Date()).equals(line.replaceAll("(?<=\\d)(st|nd|rd|th)", ""))
         }
         false
+    }
+
+    @Override
+    def shouldShowLine(line) {
+        if (line.toLowerCase().contains('allergen')) {
+            seenAllergen = true
+        }
+        return !seenAllergen
     }
 }
 
