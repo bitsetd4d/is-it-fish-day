@@ -1,7 +1,7 @@
-import menu.*
-import menu.formatter.MenuFormatter
+import menu.FishParser
+import menu.MenuGrabber
+import menu.MenuParser
 import menu.formatter.TheDiningRoomMenuFormatter
-import menu.formatter.TheMarketMenuFormatter
 import slack.SlackAttachment
 import slack.SlackField
 import slack.SlackMessage
@@ -12,13 +12,10 @@ import weather.WeatherReporter
 class Main {
 
     def centralMenu
-    def theMarketMenu
-
     def currentWeather
     def weatherCurrentHour
     def weatherNextHour
     def centralMenuItemsContainingFish
-    def marketMenuItemsContainingFish
 
     static void main(args) {
         new Main().go()
@@ -56,7 +53,6 @@ class Main {
         MenuGrabber menuGrabber = new MenuGrabber()
         menuGrabber.grabMenus()
         centralMenu = menuTextFromTheDiningRoomPdf(menuGrabber.centralMenuPdf)
-        theMarketMenu = menuTextFromTheMarketPdf(menuGrabber.theMarketPdf)
     }
 
     void lookupCurrentWeather() {
@@ -69,7 +65,7 @@ class Main {
     }
 
     boolean isItFishDaySomewhere() {
-        centralMenuItemsContainingFish.size() > 0 || marketMenuItemsContainingFish.size() > 0
+        centralMenuItemsContainingFish.size() > 0
     }
 
     def callHook(boolean fishDay) {
@@ -87,15 +83,11 @@ class Main {
         def diningRoom = new SlackField(title: 'The Dining Room')
         diningRoom.lines = centralMenu
 
-        def theMarket = new SlackField(title: 'The Market')
-        theMarket.lines = theMarketMenu
-
-        def menus = new SlackAttachment(title: 'Menus today', fields: [diningRoom, theMarket])
+        def menus = new SlackAttachment(title: 'Menus today', fields: [diningRoom])
 
         def isItFishDayAtCentral = createFishDayMessageContents("Sky Central", centralMenuItemsContainingFish)
-        def isItFishDayAtTheMarket = createFishDayMessageContents("The Market", marketMenuItemsContainingFish)
 
-        def isItFishDay = new SlackAttachment(title: 'Is it fish day?', fields: [isItFishDayAtCentral, isItFishDayAtTheMarket])
+        def isItFishDay = new SlackAttachment(title: 'Is it fish day?', fields: [isItFishDayAtCentral])
 
         def weather = new SlackField(title: currentWeather)
         weather.lines << weatherCurrentHour
@@ -121,7 +113,6 @@ class Main {
 
     def searchMenusForFish() {
         centralMenuItemsContainingFish = FishParser.getMenuItemsContainingFish(centralMenu)
-        marketMenuItemsContainingFish = FishParser.getMenuItemsContainingFish(theMarketMenu)
     }
 
     static menuTextFromTheDiningRoomPdf(pdf) {
@@ -130,9 +121,4 @@ class Main {
         formatter.formattedLines
     }
 
-    static menuTextFromTheMarketPdf(pdf) {
-        def menuParser = new MenuParser(pdf)
-        def formatter = new TheMarketMenuFormatter(menuParser.linesFromPdf)
-        formatter.formattedLines
-    }
 }

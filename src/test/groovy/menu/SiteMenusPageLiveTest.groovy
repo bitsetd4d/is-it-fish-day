@@ -11,9 +11,6 @@ class SiteMenusPageLiveTest {
 
         def central = new File("build/central.pdf")
         central << grabber.centralMenuPdf
-
-        def market = new File("build/market.pdf")
-        market << grabber.theMarketPdf
     }
 
 }
