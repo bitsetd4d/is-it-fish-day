@@ -2,6 +2,8 @@ package menu.formatter
 
 class TheDiningRoomMenuFormatter extends MenuFormatter {
 
+    boolean reachedTheEnd
+
     TheDiningRoomMenuFormatter(lines) {
         super(lines)
     }
@@ -22,6 +24,8 @@ class TheDiningRoomMenuFormatter extends MenuFormatter {
         if (line.contains("event")) return true
         if (line.contains("dessert")) return true
         if (line.contains("recommended")) return true
+        if (line.contains("vegetarian") && line.contains("main")) return true
+        if (line.contains("vegeterian") && line.contains("main")) return true // SIC
         false
     }
 
@@ -31,6 +35,16 @@ class TheDiningRoomMenuFormatter extends MenuFormatter {
 
     @Override
     def shouldShowLine(line) {
-        return true
+        reachedTheEnd = checkReachedTheBoringBits(line)
+        return !reachedTheEnd
+    }
+
+    def checkReachedTheBoringBits(line) {
+        if (reachedTheEnd) return true
+        line = line.toLowerCase()
+        if (line.contains("opening times")) return true
+        if (line.contains("allergen information")) return true
+        if (line.contains("sneak peak")) return true
+        false
     }
 }
