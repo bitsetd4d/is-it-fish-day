@@ -2,7 +2,7 @@ package menu
 
 import geb.Browser
 import org.openqa.selenium.Dimension
-import static Thread.sleep
+import static java.lang.Thread.sleep
 
 /**
  * Grab the PDFs for the menus from the website
