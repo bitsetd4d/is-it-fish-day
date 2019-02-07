@@ -3,10 +3,10 @@ package menu
 class FishParser {
 
     static final def FISH = ["anchovy", "basa", "bass", "sablefish", "blowfish", "bluefish",
-                             "bream", "brill", "butterfish", "catfish", "cod", "dogfish", "eel",
+                             "bream", "brill", "butterfish", "catfish", "cod", "coley", "dogfish", "eel",
                              "flounder", "grouper", "haddock", "hake", "halibut", "herring", "kingfish",
                              "lamprey", "lingcod", "mackerel", "monkfish", "mullet", "pangasius", "pike", "pilchard",
-                             "pollock", "sablefish", "salmon", "sardine", "shad", "shark", "skate", "snapper",
+                             "pollock", "sablefish", "salmon", "sardine", "scampi", "shad", "shark", "skate", "snapper",
                              "sole", "sturgeon", "swordfish", "tilapia", "tilefish", "trout", "tuna", "turbot", "wahoo",
                              "whitefish", "whiting", "fish"]
 

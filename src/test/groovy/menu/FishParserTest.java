@@ -18,6 +18,17 @@ public class FishParserTest {
     }
 
     @Test
+    public void recogniseColeyAndScampiAsAFishInSingleLineMenu() {
+        List<String> menu = Lists.newArrayList("A disgusting mix of coley and scampi");
+
+        List<String> menuItemsContainingFish = FishParser.getMenuItemsContainingFish(menu);
+
+        assert menuItemsContainingFish.size() == 1;
+        assert menuItemsContainingFish.get(0) == "A disgusting mix of coley and scampi";
+    }
+
+
+    @Test
     public void recogniseFishInMultiLineMenu() {
         List<String> menu = Lists.newArrayList("Ewww Pangasius", "Mmmm Beef");
 
