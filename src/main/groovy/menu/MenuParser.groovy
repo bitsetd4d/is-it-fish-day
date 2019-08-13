@@ -14,6 +14,13 @@ class MenuParser {
     def getLinesFromPdf() {
         def inputStream = new ByteArrayInputStream(pdf)
         def rawLines = tika.parseToString inputStream
-        rawLines.readLines().collect{ it.trim() }.findAll { !it.isEmpty() }
+        def lines = rawLines.readLines().collect{ it.trim() }.findAll { !it.isEmpty() }
+        if (lines.any { it.toLowerCase().contains("big breakfast")}) {
+            int start = lines.findIndexOf { it.toLowerCase().contains("soup")}
+            if (start > 0) {
+                return lines.drop(start)
+            }
+        }
+        lines
     }
 }

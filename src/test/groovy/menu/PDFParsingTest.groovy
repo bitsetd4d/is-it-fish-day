@@ -30,4 +30,13 @@ class PDFParsingTest {
         assert menuLines.head() == expectedFirstLine
         assert menuLines.last() == expectedLastLine
     }
+
+    @Test
+    void shouldSkipBreakfastAndStuffAtTheBeginning_WeJustCardAboutLunch() {
+        def pdfAsBytes = getClass().getResourceAsStream("/dining-room-tuesday-13th.pdf").getBytes()
+        def parser = new MenuParser(pdfAsBytes)
+        def menuLines = parser.linesFromPdf
+        menuLines.head() == 'SOUPS'
+    }
+
 }
